@@ -1,0 +1,140 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body{
+                margin:0;
+                background: radial-gradient(circle, #ffafbd, #ffc3a0);
+            }
+            .container{
+                display: grid;
+                justify-content: center; 
+            
+            }
+            .container div{
+                margin-bottom: 10px;
+            }
+            .header-container{
+                background-color: #FFE4E1;
+                padding:5px;
+                text-align: center;
+                margin-bottom:30px;
+                font-size: 2em;
+                font-weight: bold;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            }
+            input[type="text"]{
+                width:100%;
+                padding:10px;
+                font-size: 16px;
+                margin:10px 0px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                background-color: #f9f9f9;
+            }
+            .container .element{
+                display:inline-block;
+                background-color: white;
+                padding-top:30px;
+                padding-bottom: 30px;
+                padding-left:30px;
+                padding-right:100px;
+                border:1px solid black;
+                border-radius: 5px; 
+            }
+            .btn-ele{
+                border:1px solid black;
+                background-color: white;
+                padding:10px 100px;
+                border-radius: 5px; 
+            }
+            button {
+                padding: 10px 20px;
+                border-radius: 5px;
+                background-color: #007BFF; 
+                color: white;
+                cursor: pointer;
+                border:none;
+                font-size: 16px;
+                
+            }
+            .input-field {
+                margin-bottom: 15px;
+            }
+
+            button:hover {
+                background-color: #0056b3; 
+            }
+            .btn-ele {
+            text-align: center; 
+            margin-top: 20px; 
+            }
+            #result {
+            display: block; 
+            margin-top: 15px; 
+            font-size: 1.2em; 
+            }
+        </style>
+    </head>
+    <body>
+        <header class="header-container">
+            <div>
+                Flames
+            </div>
+        </header>
+        <div class="container">
+            <div class="element">
+                <div>
+                    <label>Enter the first name</label>
+                     <input type="text" class="input-field"id="one"placeholder="Enter the first name">
+                 </div>
+                <div>
+                  <label>Enter the second name</label>
+                 <input type="text" id="two" class="input-field"placeholder="Enter the second name">
+                </div>
+            </div>
+             <div class="btn-ele">
+                 <button id="btn" onclick="message()">FLAMES</button>
+                 <span id="result"></span>
+            </div>
+        </div>
+        <script>
+            function message(){
+                let fValue = document.getElementById("one").value.toLowerCase();
+                let sValue = document.getElementById("two").value.toLowerCase();
+                let arr1 = fValue.split('');
+                let arr2 = sValue.split('');
+                arr1 = arr1.filter(letter => {
+                    const index =arr2.indexOf(letter);
+                    if(index !== -1){
+                        arr2.splice(index,1);
+                        return false;
+                    }
+                    return true;
+                })
+                const count = arr1.length + arr2.length;
+                document.getElementById("one").value = '';
+                document.getElementById("two").value = '';
+                console.log("count",count)
+                flamesGame(count);
+
+                if(sValue === '' || fValue === '') {
+                    alert("Please add input data");
+                }
+            }
+            function flamesGame(c){
+                const flames = ['f','l','a','m','e','s'];
+                let index = 1;
+                console.log
+                while(flames.length > 1){
+                    index = (index+c) % flames.length;
+                    flames.splice(index,1);
+                }
+               if(c !== 0){
+                document.getElementById("result").innerHTML = `Result: ${flames[0]}`;
+               }
+            }
+        </script>
+    </body>
+</html>
